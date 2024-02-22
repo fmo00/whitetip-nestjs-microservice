@@ -1,4 +1,4 @@
-import { DatabaseModule } from '@app/common';
+import { DatabaseModule, LoggerModule } from '@app/common';
 import { Module } from '@nestjs/common';
 import { ReservationDocument, ReservationSchema } from './models/reservation.schema';
 import { ReservationsController } from './reservations.controller';
@@ -10,7 +10,9 @@ import { FindOneReservationService } from './services/find-one/find-one.service'
 import { UpdateReservationService } from './services/update/update.service';
 
 @Module({
-  imports: [DatabaseModule, DatabaseModule.forFeature([{ name: ReservationDocument.name, schema: ReservationSchema }])],
+  imports: [DatabaseModule, DatabaseModule.forFeature([{ name: ReservationDocument.name, schema: ReservationSchema }]),
+    LoggerModule
+  ],
   controllers: [ReservationsController],
   providers: [CreateReservationService, UpdateReservationService, DeleteReservationService, FindOneReservationService, FindAllReservationsService, ReservationsRepository],
 })
